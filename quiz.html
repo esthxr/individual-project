@@ -1,80 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Quiz</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { font-family: sans-serif; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(22, 78, 99, 0.3);
+      padding: 24px;
+      border-radius: 12px;
+      max-width: 448px;
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 24px;
+      text-shadow: 0 0 5px #164e63, 0 0 10px #164e63;
+      white-space: nowrap;
+    }
+    .quiz {
+      margin-bottom: 24px;
+    }
+    .quiz div {
+      margin-bottom: 24px;
+    }
+    .quiz p {
+      font-weight: 600;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    .quiz button {
+      width: 100%;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      padding-left: 12px;
+      padding-right: 12px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #e0e0e0;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(22, 78, 99, 0.4);
+      box-sizing: border-box;
+      text-align: left;
+    }
+    .quiz button:hover {
+      background-color: #2d6b82;
+      box-shadow: 0 4px 12px rgba(22, 78, 99, 0.6);
+      transition: all 0.2s ease;
+    }
+    .quiz button.correct {
+      background-color: #6ee7b7;
+      color: #1a1a2e;
+    }
+    .quiz button.incorrect {
+      background-color: #f87171;
+      color: #1a1a2e;
+    }
+    .quiz button:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    #resultBox {
+      margin-top: 24px;
+      text-align: center;
+      display: none;
+    }
+    #resultBox.show {
+      display: block;
+    }
+    #resultText {
+      font-size: 18px;
+      font-weight: 600;
+      padding: 12px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      color: #e0e0e0;
+    }
+    .back-btn {
+      padding: 12px 24px;
+      background-color: #164e63;
+      color: #e0e0e0;
+      font-weight: 500;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(22, 78, 99, 0.4);
+      margin-top: 32px;
+      display: inline-block;
+      width: 120px;
+      text-align: center;
+    }
+    .back-btn:hover {
+      background-color: #2d6b82;
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(22, 78, 99, 0.6);
+      transition: all 0.2s ease;
+    }
+    footer {
+      padding: 16px;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 14px;
+    }
   </style>
 </head>
-<body class="bg-sky-100 min-h-screen flex flex-col text-gray-800">
-
-  <main class="flex-1 flex flex-col items-center justify-center p-6">
-    <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full border border-sky-200">
-      <h1 class="text-3xl font-bold mb-6 text-sky-600 text-center">Mini IT Quiz</h1>
-
-      <div id="quiz" class="space-y-6">
+<body>
+  <main>
+    <div class="card">
+      <h1>Mini IT Quiz</h1>
+      <div id="quiz" class="quiz">
         <div>
-          <p class="font-semibold">1. What does "CPU" stand for?</p>
-          <div class="mt-3 space-y-2">
-            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, true)">Central Processing Unit</button>
-            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, false)">Computer Power Unit</button>
+          <p>1. What does "CPU" stand for?</p>
+          <div>
+            <button onclick="answer(this, true)">Central Processing Unit</button>
+            <button onclick="answer(this, false)">Computer Power Unit</button>
           </div>
         </div>
-
         <div>
-          <p class="font-semibold">2. Which of these is an example of an input device?</p>
-          <div class="mt-3 space-y-2">
-            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, true)">Keyboard</button>
-            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, false)">Monitor</button>
+          <p>2. Which of these is an example of an input device?</p>
+          <div>
+            <button onclick="answer(this, true)">Keyboard</button>
+            <button onclick="answer(this, false)">Monitor</button>
           </div>
         </div>
-
         <div>
-          <p class="font-semibold">3. What does "HTML" mainly define in a webpage?</p>
-          <div class="mt-3 space-y-2">
-            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, false)">The page’s design and colors</button>
-            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, true)">The structure and content</button>
+          <p>3. What does "HTML" mainly define in a webpage?</p>
+          <div>
+            <button onclick="answer(this, false)">The page’s design and colors</button>
+            <button onclick="answer(this, true)">The structure and content</button>
           </div>
         </div>
-
         <div>
-          <p class="font-semibold">4. Which one is a web browser?</p>
-          <div class="mt-3 space-y-2">
-            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, false)">Google Drive</button>
-            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, true)">Mozilla Firefox</button>
+          <p>4. Which one is a web browser?</p>
+          <div>
+            <button onclick="answer(this, false)">Google Drive</button>
+            <button onclick="answer(this, true)">Mozilla Firefox</button>
           </div>
         </div>
-
         <div>
-          <p class="font-semibold">5. In programming, what is a “bug”?</p>
-          <div class="mt-3 space-y-2">
-            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, true)">An error or flaw in the code</button>
-            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, false)">A computer virus</button>
+          <p>5. In programming, what is a “bug”?</p>
+          <div>
+            <button onclick="answer(this, true)">An error or flaw in the code</button>
+            <button onclick="answer(this, false)">A computer virus</button>
           </div>
         </div>
       </div>
-
-      <div id="resultBox" class="hidden mt-6 text-center">
-        <p id="resultText" class="text-lg font-semibold text-sky-700 bg-sky-100 p-3 rounded-lg"></p>
+      <div id="resultBox">
+        <p id="resultText"></p>
       </div>
     </div>
-
-    <div class="mt-8 text-center">
-      <a href="index.html" 
-         class="px-6 py-3 bg-sky-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-sky-400 transition">
-        Back to Home
-      </a>
-    </div>
+    <a href="index.html" class="back-btn">Back to Home</a>
   </main>
-
-  <footer class="py-6 text-center text-sm text-gray-600">
+  <footer>
     <p>Name - Chu Hsint Than Tha</p>
     <p>ID - 240702401878</p>
   </footer>
-
   <script>
     let score = 0;
     let answered = 0;
@@ -86,18 +189,18 @@
       buttons.forEach(b => b.disabled = true);
 
       if (correct) {
-        btn.classList.add('bg-green-300');
+        btn.classList.add('correct');
         btn.innerText = btn.innerText + ' ✓';
         score++;
       } else {
-        btn.classList.add('bg-red-300');
+        btn.classList.add('incorrect');
         btn.innerText = btn.innerText + ' ✗';
       }
 
       answered++;
       const resultBox = document.getElementById("resultBox");
       const resultText = document.getElementById("resultText");
-      resultBox.classList.remove("hidden");
+      resultBox.classList.add("show");
 
       if (answered < totalQuestions) {
         resultText.innerText = `Score: ${score} / ${totalQuestions}`;
