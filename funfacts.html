@@ -4,36 +4,107 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fun Facts</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { font-family: sans-serif; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(22, 78, 99, 0.3);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+      max-width: 28rem;
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+    }
+    @media (min-width: 640px) {
+      .card {
+        padding: 2rem;
+      }
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 5px #164e63, 0 0 10px #164e63;
+      white-space: nowrap;
+    }
+    @media (min-width: 640px) {
+      h1 {
+        font-size: 1.875rem;
+      }
+    }
+    ul {
+      margin-bottom: 2rem;
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.75rem;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+    .button {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: #164e63;
+      color: #e0e0e0;
+      font-weight: 500;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(22, 78, 99, 0.4);
+    }
+    .button:hover {
+      background-color: #2d6b82;
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(22, 78, 99, 0.6);
+      transition: all 0.2s ease;
+    }
+    footer {
+      padding: 1rem;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 0.875rem;
+    }
   </style>
 </head>
-<body class="bg-sky-100 min-h-screen flex flex-col text-gray-800">
-
-  <main class="flex-1 flex items-center justify-center">
-    <div class="bg-white p-10 rounded-2xl shadow-xl max-w-md w-full text-center border border-sky-200">
-      <h1 class="text-3xl font-bold mb-6 text-sky-600">Fun Facts</h1>
+<body>
+  <main>
+    <div class="card">
+      <h1>Fun Facts</h1>
       
-      <ul class="space-y-4 text-left text-gray-700">
-        <li class="bg-sky-50 p-3 rounded-lg shadow-sm">The first computer virus was created in 1986 and was called the “Brain” virus.</li>
-        <li class="bg-sky-50 p-3 rounded-lg shadow-sm">The first 1GB hard drive, introduced in 1980, weighed about 550 pounds.</li>
-        <li class="bg-sky-50 p-3 rounded-lg shadow-sm">Email existed before the World Wide Web was invented.</li>
-        <li class="bg-sky-50 p-3 rounded-lg shadow-sm">More than 90% of the world’s currency exists only in digital form.</li>
-        <li class="bg-sky-50 p-3 rounded-lg shadow-sm">The first computer mouse, invented in 1964, was made of wood.</li>
+      <ul>
+        <li>The first computer virus was created in 1986 and was called the “Brain” virus.</li>
+        <li>The first 1GB hard drive, introduced in 1980, weighed about 550 pounds.</li>
+        <li>Email existed before the World Wide Web was invented.</li>
+        <li>More than 90% of the world’s currency exists only in digital form.</li>
+        <li>The first computer mouse, invented in 1964, was made of wood.</li>
       </ul>
 
-      <div class="mt-8">
-        <a href="index.html" class="px-6 py-3 bg-sky-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-sky-400 transition">
-          Back to Home
-        </a>
+      <div>
+        <a href="index.html" class="button">Back to Home</a>
       </div>
     </div>
   </main>
 
-  <footer class="py-6 text-center text-sm text-gray-600">
-    <p>Name - Chu Hsint Than Tha</p>
-    <p>ID - 240702401878</p>
-  </footer>
 </body>
 </html>
