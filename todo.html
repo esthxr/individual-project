@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>To-Do List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: sans-serif; }
+  </style>
+</head>
+<body class="bg-sky-100 min-h-screen flex flex-col text-gray-800">
+
+  <main class="flex-1 flex flex-col items-center justify-center p-6">
+    <!-- To-Do List Card -->
+    <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full border border-sky-200">
+      <h1 class="text-3xl font-bold mb-6 text-sky-600 text-center">To-Do List</h1>
+
+      <section>
+        <label for="taskInput" class="sr-only">New task</label>
+        <input id="taskInput" type="text" placeholder="Enter a task" 
+               class="w-full px-3 py-2 border mt-5 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-300" />
+        
+        <div class="flex justify-center">
+          <button id="addBtn" 
+                  class="px-6 py-2 mt-8 bg-sky-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-sky-400 transition">
+            Add Task
+          </button>
+        </div>
+
+        <ul id="taskList" class="mt-4 space-y-3"></ul>
+      </section>
+    </div>
+
+    <!-- Back Button (outside card) -->
+    <div class="mt-8 text-center">
+      <a href="index.html" 
+         class="px-6 py-3 bg-sky-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-sky-400 transition">
+        Back to Home
+      </a>
+    </div>
+  </main>
+
+  <footer class="py-6 text-center text-sm text-gray-600">
+    <p>Name - Chu Hsint Than Tha</p>
+    <p>ID - 240702401878</p>
+  </footer>
+
+  <script>
+    const addBtn = document.getElementById('addBtn');
+    addBtn.addEventListener('click', () => {
+      const input = document.getElementById('taskInput');
+      const value = input.value.trim();
+      if (!value) return;
+      const li = document.createElement('li');
+      li.className = 'mt-8 flex justify-between items-center bg-sky-50 px-3 py-2 rounded shadow-sm';
+      li.innerHTML = `
+        <span>${value}</span>
+        <div>
+          <button class="mr-2 text-sm text-sky-600 hover:underline" onclick="toggleDone(this)">Done</button>
+          <button class="text-sm text-red-500 hover:underline" onclick="this.closest('li').remove()">Delete</button>
+        </div>`;
+      document.getElementById('taskList').appendChild(li);
+      input.value = '';
+    });
+
+    function toggleDone(btn) {
+      const span = btn.closest('li').querySelector('span');
+      span.classList.toggle('line-through');
+      span.classList.toggle('text-gray-500');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: sans-serif; }
+  </style>
+</head>
+<body class="bg-sky-100 min-h-screen flex flex-col text-gray-800">
+
+  <main class="flex-1 flex flex-col items-center justify-center p-6">
+    <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full border border-sky-200">
+      <h1 class="text-3xl font-bold mb-6 text-sky-600 text-center">Mini IT Quiz</h1>
+
+      <div id="quiz" class="space-y-6">
+        <div>
+          <p class="font-semibold">1. What does "CPU" stand for?</p>
+          <div class="mt-3 space-y-2">
+            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, true)">Central Processing Unit</button>
+            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, false)">Computer Power Unit</button>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-semibold">2. Which of these is an example of an input device?</p>
+          <div class="mt-3 space-y-2">
+            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, true)">Keyboard</button>
+            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, false)">Monitor</button>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-semibold">3. What does "HTML" mainly define in a webpage?</p>
+          <div class="mt-3 space-y-2">
+            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, false)">The page’s design and colors</button>
+            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, true)">The structure and content</button>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-semibold">4. Which one is a web browser?</p>
+          <div class="mt-3 space-y-2">
+            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, false)">Google Drive</button>
+            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, true)">Mozilla Firefox</button>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-semibold">5. In programming, what is a “bug”?</p>
+          <div class="mt-3 space-y-2">
+            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, true)">An error or flaw in the code</button>
+            <button class="w-full py-2 rounded bg-sky-50" onclick="answer(this, false)">A computer virus</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="resultBox" class="hidden mt-6 text-center">
+        <p id="resultText" class="text-lg font-semibold text-sky-700 bg-sky-100 p-3 rounded-lg"></p>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center">
+      <a href="index.html" 
+         class="px-6 py-3 bg-sky-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-sky-400 transition">
+        Back to Home
+      </a>
+    </div>
+  </main>
+
+  <footer class="py-6 text-center text-sm text-gray-600">
+    <p>Name - Chu Hsint Than Tha</p>
+    <p>ID - 240702401878</p>
+  </footer>
+
+  <script>
+    let score = 0;
+    let answered = 0;
+    const totalQuestions = 5;
+
+    function answer(btn, correct) {
+      const parent = btn.parentElement.parentElement;
+      const buttons = parent.querySelectorAll('button');
+      buttons.forEach(b => b.disabled = true);
+
+      if (correct) {
+        btn.classList.add('bg-green-300');
+        btn.innerText = btn.innerText + ' ✓';
+        score++;
+      } else {
+        btn.classList.add('bg-red-300');
+        btn.innerText = btn.innerText + ' ✗';
+      }
+
+      answered++;
+      const resultBox = document.getElementById("resultBox");
+      const resultText = document.getElementById("resultText");
+      resultBox.classList.remove("hidden");
+
+      if (answered < totalQuestions) {
+        resultText.innerText = `Score: ${score} / ${totalQuestions}`;
+      } else {
+        resultText.innerText = `You got ${score} / ${totalQuestions} points. Congratulations!`;
+      }
+    }
+  </script>
+</body>
+</html>
