@@ -1,74 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>To-Do List</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { font-family: sans-serif; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 12px rgba(22, 78, 99, 0.3);
+      padding: 24px;
+      border-radius: 12px;
+      max-width: 448px;
+      width: 100%;
+      text-align: center;
+      margin-top: 20px;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 24px;
+      text-shadow: 0 0 5px #164e63, 0 0 10px #164e63;
+      white-space: nowrap;
+    }
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      padding-left: 12px;
+      padding-right: 12px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #e0e0e0;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      margin-top: 20px;
+      outline: none;
+      text-indent: 0;
+    }
+    input:focus {
+      border-color: #164e63;
+      box-shadow: 0 0 0 2px rgba(22, 78, 99, 0.5);
+    }
+    ul {
+      margin-bottom: 32px;
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 12px;
+      padding-left: 12px;
+      padding-right: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+    }
+    li .text {
+      flex: 1;
+    }
+    li .done {
+      text-decoration: line-through;
+      color: #9ca3af;
+    }
+    li button {
+      background: none;
+      border: none;
+      color: #e0e0e0;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    li button.done-btn {
+      color: #76adc1;
+      margin-right: 8px;
+    }
+    li button.delete-btn {
+      color: #a7363c;
+    }
+    li button:hover {
+      text-decoration: underline;
+    }
+    .add-btn {
+      padding: 12px 24px;
+      background-color: #5b97ac;
+      color: #e0e0e0;
+      font-weight: 500;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(22, 78, 99, 0.4);
+      border: none;
+      cursor: pointer;
+      margin-top: 32px;
+      display: inline-block;
+      width: 120px;
+      text-align: center;
+    }
+    .add-btn:hover {
+      background-color: #2d6b82;
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(22, 78, 99, 0.6);
+      transition: all 0.2s ease;
+    }
+    .back-btn {
+      padding: 12px 24px;
+      background-color: #164e63;
+      color: #e0e0e0;
+      font-weight: 500;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(22, 78, 99, 0.4);
+      margin-top: 32px;
+      display: inline-block;
+      width: 120px;
+      text-align: center;
+    }
+    .back-btn:hover {
+      background-color: #2d6b82;
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(22, 78, 99, 0.6);
+      transition: all 0.2s ease;
+    }
+    footer {
+      padding: 16px;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 14px;
+    }
   </style>
 </head>
-<body class="bg-sky-100 min-h-screen flex flex-col text-gray-800">
-
-  <main class="flex-1 flex flex-col items-center justify-center p-6">
-    <!-- To-Do List Card -->
-    <div class="bg-white p-8 rounded-2xl shadow-xl max-w-md w-full border border-sky-200">
-      <h1 class="text-3xl font-bold mb-6 text-sky-600 text-center">To-Do List</h1>
-
+<body>
+  <main>
+    <div class="card">
+      <h1>To-Do List</h1>
       <section>
-        <label for="taskInput" class="sr-only">New task</label>
-        <input id="taskInput" type="text" placeholder="Enter a task" 
-               class="w-full px-3 py-2 border mt-5 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-sky-300" />
-        
-        <div class="flex justify-center">
-          <button id="addBtn" 
-                  class="px-6 py-2 mt-8 bg-sky-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-sky-400 transition">
-            Add Task
-          </button>
-        </div>
-
-        <ul id="taskList" class="mt-4 space-y-3"></ul>
+        <input id="taskInput" type="text" placeholder="Enter a task" />
+        <button class="add-btn" id="addBtn">Add Task</button>
+        <ul id="taskList"></ul>
       </section>
     </div>
-
-    <!-- Back Button (outside card) -->
-    <div class="mt-8 text-center">
-      <a href="index.html" 
-         class="px-6 py-3 bg-sky-300 text-gray-800 font-semibold rounded-lg shadow-md hover:bg-sky-400 transition">
-        Back to Home
-      </a>
-    </div>
+    <a href="index.html" class="back-btn">Back to Home</a>
   </main>
-
-  <footer class="py-6 text-center text-sm text-gray-600">
+  <footer>
     <p>Name - Chu Hsint Than Tha</p>
     <p>ID - 240702401878</p>
   </footer>
-
   <script>
+    const taskList = document.getElementById('taskList');
     const addBtn = document.getElementById('addBtn');
+    const input = document.getElementById('taskInput');
+
+    function loadTasks() {
+      const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      tasks.forEach(task => addTaskToList(task.text, task.done));
+    }
+
+    function saveTasks() {
+      const tasks = [];
+      taskList.querySelectorAll('li').forEach(li => {
+        const text = li.querySelector('.text').innerText;
+        const done = li.querySelector('.text').classList.contains('done');
+        tasks.push({ text, done });
+      });
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    function addTaskToList(text, done = false) {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span class="text ${done ? 'done' : ''}">${text}</span>
+        <div>
+          <button class="done-btn" onclick="toggleDone(this)">Done</button>
+          <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+        </div>
+      `;
+      taskList.appendChild(li);
+    }
+
     addBtn.addEventListener('click', () => {
-      const input = document.getElementById('taskInput');
       const value = input.value.trim();
       if (!value) return;
-      const li = document.createElement('li');
-      li.className = 'mt-8 flex justify-between items-center bg-sky-50 px-3 py-2 rounded shadow-sm';
-      li.innerHTML = `
-        <span>${value}</span>
-        <div>
-          <button class="mr-2 text-sm text-sky-600 hover:underline" onclick="toggleDone(this)">Done</button>
-          <button class="text-sm text-red-500 hover:underline" onclick="this.closest('li').remove()">Delete</button>
-        </div>`;
-      document.getElementById('taskList').appendChild(li);
+      addTaskToList(value);
       input.value = '';
+      saveTasks();
     });
 
     function toggleDone(btn) {
-      const span = btn.closest('li').querySelector('span');
-      span.classList.toggle('line-through');
-      span.classList.toggle('text-gray-500');
+      const span = btn.closest('li').querySelector('.text');
+      span.classList.toggle('done');
+      saveTasks();
     }
+
+    function deleteTask(btn) {
+      btn.closest('li').remove();
+      saveTasks();
+    }
+
+    loadTasks();
   </script>
 </body>
 </html>
